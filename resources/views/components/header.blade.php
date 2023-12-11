@@ -1,3 +1,5 @@
 <header>
-    <h1>Library</h1>
+    <a href="{{route('dashboard')}}">
+        <h1>Library Management System</h1>
+    </a>
 </header>

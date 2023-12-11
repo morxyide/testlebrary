@@ -1,11 +1,7 @@
-<!-- resources/views/index.blade.php -->
-
 @include('components.header')
 
-<!-- Display the books data in a table -->
-
-<h2>Books</h2>
-<a href="{{route('books.create')}}"> Create a book</a>
+<h2>Magazines</h2>
+<a href="{{route('books.create')}}"> Create a Magazines</a>
 
 @if (session('success'))
     <div class="alert alert-success">
@@ -31,6 +27,7 @@
                 <th><strong>Category</strong></th>
                 <th><strong>Description</strong></th>
                 <th><strong>Quantity</strong></th>
+                <th><strong>Action</strong></th>
             </tr>
             </thead>
             <tbody>

@@ -31,6 +31,7 @@
                 <th><strong>Category</strong></th>
                 <th><strong>Description</strong></th>
                 <th><strong>Quantity</strong></th>
+                <th><strong>Action</strong></th>
             </tr>
             </thead>
             <tbody>
