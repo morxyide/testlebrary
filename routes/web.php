@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\MagazineController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::post('/books', [BookController::class, 'store'])->name('books.store');
 Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
 Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
 Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
+
+Route::get('/magazine', [MagazineController::class, 'index'])->name('magazine.index');
 
 //Route::get('/books', function () {
 //    $books = Book::all();
