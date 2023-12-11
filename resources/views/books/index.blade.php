@@ -1,6 +1,6 @@
 <!-- resources/views/index.blade.php -->
 
-<h1>Library Management System</h1>
+@include('components.header')
 
 <!-- Display the books data in a table -->
 
