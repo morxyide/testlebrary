@@ -5,6 +5,13 @@
 <!-- Display the books data in a table -->
 
 <h2>Books</h2>
+<a href="{{route('books.create')}}"> Create a book</a>
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{session('success')}}
+    </div>
+@endif
 
 <!-- Check if the books collection is empty or not -->
 @if ($books->isEmpty())
@@ -40,6 +47,16 @@
                     <td>{{ $book->category }}</td>
                     <td>{{ $book->description }}</td>
                     <td>{{ $book->quantity }}</td>
+                    <td>
+                        <form action="{{ route('books.edit', $book) }}" method="get">
+                            <button type="submit" class="btn btn-danger">Edit</button>
+                        </form>
+                        <form action="{{ route('books.destroy', $book) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
