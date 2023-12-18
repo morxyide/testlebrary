@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <nav class="flex items-center justify-between bg-blue-200 p-4 mb-5">
+    <nav class="flex items-center justify-between bg-blue-200 p-4 mb-0">
         <a class="text-xl font-bold text-black-900" href="{{ route('user.dashboard') }}">Library Management System</a>
 
         <div class="block">

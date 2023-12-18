@@ -1,5 +1,7 @@
-<header>
-    <a href="{{route('dashboard')}}">
-        <h1>Library Management System</h1>
+@extends('../auth.layouts')
+
+@section('content')
+    <a href="{{route('user.dashboard')}}">
+        <h1></h1>
     </a>
-</header>
+@endsection

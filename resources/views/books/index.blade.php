@@ -3,9 +3,20 @@
 @include('components.header')
 
 <!-- Display the books data in a table -->
+<nav class="bg-blue-200 p-4 text-black">
+    <ul class="flex space-x-4">
+        <h1 class="font-bold mb-0">View Books</h1>
+        <li><a href="{{ route('library.index') }}" class="hover:underline" >(<< back)</a></li>
+    </ul>
+</nav>
 
-<h2>Books</h2>
-<a href="{{route('books.create')}}"> Create a book</a>
+@if (Auth::user() && Auth::user()->role == 'admin')
+    <div class="flex justify-center">
+        <a href="{{route('books.create')}}" class="inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-black uppercase transition bg-blue-200 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none">
+            Create a book
+        </a>
+    </div>
+@endif
 
 @if (session('success'))
     <div class="alert alert-success">
@@ -17,38 +28,38 @@
 @if ($books->isEmpty())
     <p>There are no books in the library.</p>
 @else
-    <div>
-        <table>
+    <div class="overflow-x-auto">
+        <table class="w-full rounded-lg">
             <thead>
-            <tr>
-                <th><strong>ID</strong></th>
-                <th><strong>Title</strong></th>
-                <th><strong>Author</strong></th>
-                <th><strong>Publisher</strong></th>
-                <th><strong>ISBN</strong></th>
-                <th><strong>Edition</strong></th>
-                <th><strong>Year Published</strong></th>
-                <th><strong>Category</strong></th>
-                <th><strong>Description</strong></th>
-                <th><strong>Quantity</strong></th>
-                <th><strong>Action</strong></th>
+            <tr class="text-left font-bold bg-blue-200">
+                <th class="px-4 py-3">ID</th>
+                <th class="px-4 py-3 break-words">Title</th>
+                <th class="px-4 py-3">Author</th>
+                <th class="px-4 py-3">Publisher</th>
+                <th class="px-4 py-3">ISBN</th>
+                <th class="px-4 py-3">Edition</th>
+                <th class="px-4 py-3">Year Published</th>
+                <th class="px-4 py-3">Category</th>
+                <th class="px-4 py-3 break-words">Description</th>
+                <th class="px-4 py-3">Quantity</th>
+                <th class="px-4 py-3">Action</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-white divide-y divide-gray-200">
             <!-- Loop through the books collection and display each book's properties -->
             @foreach ($books as $book)
                 <tr>
-                    <td>{{ $book->id }}</td>
-                    <td>{{ $book->title }}</td>
-                    <td>{{ $book->author }}</td>
-                    <td>{{ $book->publisher }}</td>
-                    <td>{{ $book->isbn }}</td>
-                    <td>{{ $book->edition }}</td>
-                    <td>{{ $book->year_published }}</td>
-                    <td>{{ $book->category }}</td>
-                    <td>{{ $book->description }}</td>
-                    <td>{{ $book->quantity }}</td>
-                    <td>
+                    <td class="px-4 py-3">{{ $book->id }}</td>
+                    <td class="px-4 py-3 break-words">{{ $book->title }}</td>
+                    <td class="px-4 py-3">{{ $book->author }}</td>
+                    <td class="px-4 py-3">{{ $book->publisher }}</td>
+                    <td class="px-4 py-3">{{ $book->isbn }}</td>
+                    <td class="px-4 py-3">{{ $book->edition }}</td>
+                    <td class="px-4 py-3">{{ $book->year_published }}</td>
+                    <td class="px-4 py-3">{{ $book->category }}</td>
+                    <td class="px-4 py-3 break-words">{{ $book->description }}</td>
+                    <td class="px-4 py-3">{{ $book->quantity }}</td>
+                    <td class="px-4 py-3">
                         <form action="{{ route('books.edit', $book) }}" method="get">
                             <button type="submit" class="btn btn-danger">Edit</button>
                         </form>

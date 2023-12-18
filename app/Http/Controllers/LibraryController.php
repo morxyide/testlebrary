@@ -11,7 +11,7 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        return view('manage/library');
+        return view('manage.library');
     }
 
     /**
