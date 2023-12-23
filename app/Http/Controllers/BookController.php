@@ -14,7 +14,7 @@ class BookController extends Controller
     public function index(): View
     {
         $books = Book::all();
-        return view('books/index', ['books' => $books]);
+        return view('books.index', ['books' => $books]);
     }
 
     /**
@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function create(): View
     {
-        return view('create');
+        return view('books.create');
     }
 
     /**
@@ -60,7 +60,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('edit', compact('book'));
+        return view('books.edit', compact('book'));
     }
 
     /**
