@@ -38,15 +38,14 @@ Route::get('/magazine', [MagazineController::class, 'index'])->name('magazines.i
 
 
 // Dashboard Route
-Route::get('/admin-dashboard', [CustomAuthController::class, 'adminDashboardPage'])->name('admin.dashboard');
-Route::get('/user-dashboard', [CustomAuthController::class, 'userDashboardPage'])->name('user.dashboard');
+Route::get('/dashboard', [CustomAuthController::class, 'dashboardPage'])->name('dashboard');
 
 // Authentication Routes
 Route::get('/login', [CustomAuthController::class, 'loginPage'])->name('login.page');
 Route::post('/custom-login', [CustomAuthController::class, 'customLogin'])->name('custom.login');
 Route::get('/register', [CustomAuthController::class, 'registerPage'])->name('register.page');
 Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration'])->name('custom.registration');
-Route::get('/signout', [CustomAuthController::class, 'signout'])->name('signout');
+Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 
 //Route::get('/books', function () {

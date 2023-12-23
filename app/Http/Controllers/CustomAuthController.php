@@ -11,7 +11,7 @@ use Illuminate\Auth\AuthManager;
 
 class CustomAuthController extends Controller
 {
-    public function loginPage(): \Illuminate\Contracts\View\View
+    public function loginPage()
     {
         return view('auth.login');
     }
@@ -25,20 +25,14 @@ class CustomAuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard')->withSuccess('Signed in');
-            } else {
-                return redirect()->route('user.dashboard')->withSuccess('Signed in');
-            }
+            return redirect()->route('dashboard')->withSuccess('Signed in');
         } else {
             return redirect("/login")->withSuccess('Login details are not valid');
         }
     }
 
-    public function registerPage() : \Illuminate\Contracts\View\View
+    public function registerPage()
     {
         return view('auth.registration');
     }
@@ -56,9 +50,8 @@ class CustomAuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        // TODO: Check why this does not redirect to the dashboard
         if (Auth::attempt($credentials)) {
-            return redirect()->route('user.dashboard')->withSuccess('Signed in');
+            return redirect()->route('dashboard')->withSuccess('Signed in');
         } else {
             return redirect()->route('register.page')->withSuccess('Registration failed or try to login again...');
         }
@@ -73,25 +66,16 @@ class CustomAuthController extends Controller
         ]);
     }
 
-    public function adminDashboardPage()
+    public function dashboardPage()
     {
         if (Auth::check()) {
-            return view('adminDashboard');
+            return view('dashboard');
         }
 
         return redirect()->route("login")->withSuccess('You are not allowed to access');
     }
 
-    public function userDashboardPage()
-    {
-        if (Auth::check()) {
-            return view('userDashboard');
-        } else {
-            return redirect()->route("login.page")->withSuccess('You are not allowed to access');
-        }
-    }
-
-    public function signout()
+    public function signOut()
     {
         Session::flush();
         Auth::logout();
