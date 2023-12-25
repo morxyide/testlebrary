@@ -24,7 +24,6 @@ Route::get('/', function () {
 });
 
 Route::get('/manage-library', [LibraryController::class, 'index'])->name('library.index');
-Route::get('/manage-users', [UserController::class, 'index'])->name('users.index');
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
@@ -47,6 +46,9 @@ Route::get('/register', [CustomAuthController::class, 'registerPage'])->name('re
 Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration'])->name('custom.registration');
 Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
+# Manage users
+Route::get('/manage-users', [UserController::class, 'index'])->name('users.index');
+Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
 
 //Route::get('/books', function () {
 //    $books = Book::all();

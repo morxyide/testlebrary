@@ -6,10 +6,9 @@
     </ul>
 </nav>
 
-@if ($users->isEmpty())
-    <p>There are no books in the library.</p>
-@else
-    <div>
+
+<x-data-table :headers="$headers" :rows="$rows" />
+    {{-- <div>
         <table>
             <thead>
             <tr>
@@ -39,5 +38,5 @@
             @endforeach
             </tbody>
         </table>
-    </div>
-@endif
+    </div> --}}
+{{-- @endif --}}

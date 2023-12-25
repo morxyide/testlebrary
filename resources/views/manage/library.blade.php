@@ -8,7 +8,8 @@
     </ul>
 </nav>
 
-<div class="container mx-auto py-8">
+<x-data-table :headers="$headers" :rows="$rows" />
+{{-- <div class="container mx-auto py-8">
     <table class="table-auto w-full">
         <thead>
             <tr>
@@ -40,5 +41,5 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div> --}}
 

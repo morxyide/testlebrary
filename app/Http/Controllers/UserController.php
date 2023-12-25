@@ -13,7 +13,26 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('manage/users', ['users' => $users]);
+
+        $headers = ['ID', 'Name', 'Email', 'Role', 'Action'];
+
+        $rows = $users->map(function ($user) {
+            $deleteButton = '<form action="'.route('users.destroy', $user).'" method="post">
+                                '.csrf_field().'
+                                '.method_field('DELETE').'
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                             </form>';
+
+            return [
+                $user->id,
+                $user->name,
+                $user->email,
+                $user->role,
+                $deleteButton,
+            ];
+        });
+
+        return view('manage.users', compact('headers', 'rows'));
     }
 
     /**
@@ -61,6 +80,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user) {
+            $user->delete();
+        }
     }
 }
