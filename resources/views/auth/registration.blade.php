@@ -1,4 +1,4 @@
-@extends('auth.layouts')
+@extends('components.header')
 @section('content')
     <main class="mx-4">
         <h3 class="text-center text-sl font-semibold mb-4">Registration</h3>

@@ -22,10 +22,10 @@
     <p>There are no books in the library.</p>
 @else
 
-    <div class="rounded overflow-hidden shadow bg-blue-400 my-2 mx-2">
+    <div class="rounded overflow-hidden shadow my-2 mx-20">
         <table class="w-full text-xs">
             <thead>
-            <tr class="text-left font-bold bg-blue-400">
+            <tr class="text-left font-bold bg-blue-200">
                 {{-- <th class="px-2 py-3">ID</th> --}}
                 <th class="px-2 py-3 break-words">Title</th>
                 <th class="px-2 py-3">Author</th>
@@ -39,7 +39,7 @@
                 <th class="px-2 py-3">Action</th>
             </tr>
             </thead>
-            <tbody class= "divide-y divide-gray-100 bg-blue-100">
+            <tbody class= "divide-y divide-gray-100">
             @foreach ($books as $book)
                 <tr>
                     {{-- <td class="px-2 py-3">{{ $book->id }}</td> --}}
@@ -54,12 +54,12 @@
                     <td class="px-2 py-3">{{ $book->quantity }}</td>
                     <td class="px-2 py-3">
                         <form action="{{ route('books.edit', $book) }}" method="get" class="mb-2">
-                            <button type="submit" class="w-full bg-blue-300 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Edit</button>
+                            <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Edit</button>
                         </form>
                         <form action="{{ route('books.destroy', $book) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="w-full bg-blue-300 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
+                            <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
                         </form>
                     </td>
                 </tr>

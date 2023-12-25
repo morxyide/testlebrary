@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\CD;
+use App\Models\Magazine;
+use App\Models\Video;
 
 class LibraryController extends Controller
 {
@@ -11,7 +15,12 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        return view('manage.library');
+        $bookCount = Book::count();
+        $cdCount = CD::count();
+        $magazineCount = Magazine::count();
+        $videoCount = Video::count();
+    
+        return view('manage.library', compact('bookCount', 'cdCount', 'magazineCount', 'videoCount'));
     }
 
     /**

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route("user.dashboard");
+    return redirect()->route("dashboard");
 });
 
 Route::get('/manage-library', [LibraryController::class, 'index'])->name('library.index');

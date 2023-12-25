@@ -72,7 +72,7 @@ class CustomAuthController extends Controller
             return view('dashboard');
         }
 
-        return redirect()->route("login")->withSuccess('You are not allowed to access');
+        return redirect()->route("login.page")->withSuccess('You are not allowed to access');
     }
 
     public function signOut()

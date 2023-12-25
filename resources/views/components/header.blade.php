@@ -8,7 +8,7 @@
 
 <body>
     <nav class="flex items-center justify-between bg-blue-200 p-4 mb-0">
-        <a class="text-xl font-bold text-black-900" href="{{ route('user.dashboard') }}">
+        <a class="text-xl font-bold text-black-900" href="{{ route('dashboard') }}">
             Library Management System 
             @if (Auth::check() && Auth::user()->role == 'admin')
                 <span class="text-xs">(admin)</span>
@@ -18,12 +18,13 @@
         </a>
 
         <ul class="flex space-x-4">
-
-            <li><a href="{{ route('library.index') }}" class="hover:underline">Manage Library</a></li>
-            <li><a href="{{ route('users.index') }}" class="hover:underline">Manage Users</a></li>
-
-            <li><a href="{{ route('library.index') }}" class="hover:underline">View Library</a></li>
-            <li><a href="{{ route('users.index') }}" class="hover:underline">Due Returns</a></li>
+            @if (Auth::check() && Auth::user()->role == 'admin')
+                <li><a href="{{ route('library.index') }}" class="hover:underline">Manage Library</a></li>
+                <li><a href="{{ route('users.index') }}" class="hover:underline">Manage Users</a></li>
+            @elseif (Auth::check() && Auth::user()->role == 'user')
+                <li><a href="{{ route('library.index') }}" class="hover:underline">View Library</a></li>
+                <li><a href="{{ route('users.index') }}" class="hover:underline">Due Returns</a></li>
+            @endif
         </ul>
         
 

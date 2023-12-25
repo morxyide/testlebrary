@@ -1,9 +1,11 @@
 @include('components.header')
 
-<h2>Users: </h2>
+<nav class="bg-blue-200 p-4 text-black">
+    <ul class="flex space-x-4">
+        <h1 class="font-bold mb-0">Manage Users</h1>
+    </ul>
+</nav>
 
-
-<!-- Check if the books collection is empty or not -->
 @if ($users->isEmpty())
     <p>There are no books in the library.</p>
 @else
