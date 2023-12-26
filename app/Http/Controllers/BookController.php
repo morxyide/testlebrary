@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -87,4 +88,20 @@ class BookController extends Controller
         return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
     }
 
+    public function borrow(Book $book)
+    {
+        $user = Auth::user();
+        $borrowed_at = now();
+        $return_by = now()->addDays(14);
+
+        $book->borrowings()->create([
+            'user_id' => $user->id,
+            'borrowable_type' => Book::class,
+            'borrowable_id' => $book->id,
+            'borrowed_at' => $borrowed_at,
+            'return_by' => $return_by,
+        ]);
+
+        return redirect()->route('books.index')->with('success', 'Book borrowed successfully!');
+    }
 }

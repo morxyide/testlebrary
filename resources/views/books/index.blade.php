@@ -1,6 +1,5 @@
 @include('components.header')
 
-<!-- Display the books data in a table -->
 <nav class="bg-blue-200 p-4 text-black mb-2">
     <ul class="flex space-x-4">
         <h1 class="font-bold mb-0">View Books</h1>
@@ -53,14 +52,26 @@
                     <td class="px-2 py-3 break-words">{{ $book->description }}</td>
                     <td class="px-2 py-3">{{ $book->quantity }}</td>
                     <td class="px-2 py-3">
-                        <form action="{{ route('books.edit', $book) }}" method="get" class="mb-2">
-                            <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Edit</button>
-                        </form>
-                        <form action="{{ route('books.destroy', $book) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
-                        </form>
+
+                        @if (Auth::check() && Auth::user()->role == 'admin')
+                            {{-- Edit book button (only for admin) --}}
+                            <form action="{{ route('books.edit', $book) }}" method="get" class="mb-2">
+                                <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Edit</button>
+                            </form>
+
+                            {{-- Delete book button (only for admin) --}}
+                            <form action="{{ route('books.destroy', $book) }}" method="post" class="mb-2">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
+                            </form>
+                        @elseif (Auth::check() && Auth::user()->role == 'user')
+                            {{-- Borrow book button --}}
+                            <form action="{{ route('books.borrow', $book) }}" method="post" class="mb-2">
+                                @csrf
+                                <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Borrow</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

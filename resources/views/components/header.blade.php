@@ -23,7 +23,7 @@
                 <li><a href="{{ route('users.index') }}" class="hover:underline">Manage Users</a></li>
             @elseif (Auth::check() && Auth::user()->role == 'user')
                 <li><a href="{{ route('library.index') }}" class="hover:underline">View Library</a></li>
-                <li><a href="{{ route('users.index') }}" class="hover:underline">Due Returns</a></li>
+                <li><a href="{{ route('user.borrowed') }}" class="hover:underline">Due Returns</a></li>
             @endif
         </ul>
         

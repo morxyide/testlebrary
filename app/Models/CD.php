@@ -19,4 +19,9 @@ class CD extends Model
         'description',
         'quantity',
     ];
+
+    public function borrowings()
+    {
+        return $this->morphMany(Borrowing::class, 'borrowable');
+    }
 }
