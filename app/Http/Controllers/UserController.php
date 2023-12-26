@@ -20,7 +20,7 @@ class UserController extends Controller
             $deleteButton = '<form action="'.route('users.destroy', $user).'" method="post">
                                 '.csrf_field().'
                                 '.method_field('DELETE').'
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
                              </form>';
 
             return [
@@ -84,6 +84,10 @@ class UserController extends Controller
 
         if ($user) {
             $user->delete();
+            return redirect()->route('users.index')->with('success', 'Book deleted successfully!');
+        } else {
+            return redirect()->route('users.index')->with('error', 'Error deleting user!');
         }
+        
     }
 }

@@ -48,7 +48,7 @@ Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout'
 
 # Manage users
 Route::get('/manage-users', [UserController::class, 'index'])->name('users.index');
-Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 //Route::get('/books', function () {
 //    $books = Book::all();
