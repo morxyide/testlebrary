@@ -66,11 +66,16 @@
                                 <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
                             </form>
                         @elseif (Auth::check() && Auth::user()->role == 'user')
-                            {{-- Borrow book button --}}
-                            <form action="{{ route('books.borrow', $book) }}" method="post" class="mb-2">
-                                @csrf
-                                <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Borrow</button>
-                            </form>
+                            @if (!Auth::user()->borrowings->contains('borrowable_id', $book->id))
+                                {{-- Borrow book button --}}
+                                <form action="{{ route('books.borrow', $book) }}" method="post" class="mb-2">
+                                    @csrf
+                                    <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Borrow</button>
+                                </form>
+                            @else
+                                    <p type="submit" class="w-full bg-green-200 text-black font-bold py-2 px-4 rounded-lg">Borrowed</p>
+                            @endif
+
                         @endif
                     </td>
                 </tr>
