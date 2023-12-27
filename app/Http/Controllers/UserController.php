@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Borrowing;
 
 class UserController extends Controller
 {
@@ -95,9 +96,14 @@ class UserController extends Controller
     public function borrowedItems()
     {
         $user = Auth::user();
-
         $borrowings = $user->borrowings;
 
         return view('manage.borrowings', compact('borrowings'));
+    }
+
+    public function return(Borrowing $borrowing)
+    {
+        $borrowing->delete();
+        return redirect()->route('user.borrowed')->with('success', 'Item marked as returned successfully!');
     }
 }

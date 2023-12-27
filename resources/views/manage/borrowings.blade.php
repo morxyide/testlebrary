@@ -15,6 +15,7 @@
             <th class="px-2 py-3 break-words">Title</th>
             <th class="px-2 py-3">Borrowed At</th>
             <th class="px-2 py-3">Return By</th>
+            <th class="px-2 py-3">Return</th>
         </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
@@ -24,6 +25,13 @@
                 <td class="px-2 py-3 break-words">{{ $borrowing->borrowable->title }}</td>
                 <td class="px-2 py-3">{{ $borrowing->borrowed_at }}</td>
                 <td class="px-2 py-3">{{ $borrowing->return_by }}</td>
+                <td class="px-2 py-3">
+                    <form action="{{ route('user.return', $borrowing) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-green-200 hover:bg-green-400 text-black font-bold py-2 px-4 rounded-lg">✔️</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>
