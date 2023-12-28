@@ -49,8 +49,8 @@ Route::post('/custom-registration', [CustomAuthController::class, 'customRegistr
 Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 # Manage users
-Route::get('/manage-users', [UserController::class, 'index'])->name('users.index');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('/manage-users', [UserController::class, 'index'])->name('users.index'); # For admin only
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy'); # For admin only
 Route::get('/borrowed', [UserController::class, 'borrowedItems'])->name('user.borrowed');
 Route::delete('/borrowings/{borrowing}', [UserController::class, 'return'])->name('user.return');
 

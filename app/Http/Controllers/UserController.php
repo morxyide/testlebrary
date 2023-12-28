@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        $headers = ['ID', 'Name', 'Email', 'Role', 'Action'];
+        $headers = ['ID', 'Name', 'Email', 'Role', '# of Borrowed items','Action'];
 
         $rows = $users->map(function ($user) {
             $deleteButton = '<form action="'.route('users.destroy', $user).'" method="post">
@@ -24,12 +24,13 @@ class UserController extends Controller
                                 '.method_field('DELETE').'
                                 <button type="submit" class="bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
                              </form>';
-
+            $borrowedItemsCounter = $user->borrowings->count();
             return [
                 $user->id,
                 $user->name,
                 $user->email,
                 $user->role,
+                $borrowedItemsCounter,
                 $deleteButton,
             ];
         });
