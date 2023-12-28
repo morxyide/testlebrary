@@ -26,7 +26,11 @@
                 <div class="max-w-md mx-auto">
                     <div class="flex items-center space-x-5">
                         <div class="block pl-2 font-bold text-xl self-start text-gray-700">
-                            <p class="text-sm text-gray-500 font-semibold leading-relaxed"> You borrowed {{ Auth::user()->borrowings->count()}} items.</p>
+                            @if (Auth::user() && Auth::user()->role == 'admin')
+                                <p class="text-sm text-gray-500 font-semibold leading-relaxed"> Total of {{ \App\Models\Borrowing::count()}} items borrowed form the library</p>
+                            @elseif (Auth::user() && Auth::user()->role == 'user')
+                                <p class="text-sm text-gray-500 font-semibold leading-relaxed"> You borrowed {{ Auth::user()->borrowings->count()}} items.</p>
+                            @endif
                         </div>
                     </div>
                 </div>
