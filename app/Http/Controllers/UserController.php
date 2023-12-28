@@ -16,22 +16,41 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        $headers = ['ID', 'Name', 'Email', 'Role', '# of Borrowed items','Action'];
+        $headers = ['ID', 'Name', 'Email', 'Role', '# of Borrowed items', 'Action'];
 
         $rows = $users->map(function ($user) {
-            $deleteButton = '<form action="'.route('users.destroy', $user).'" method="post">
-                                '.csrf_field().'
-                                '.method_field('DELETE').'
-                                <button type="submit" class="bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
-                             </form>';
+            $deleteRoute = route('users.destroy', $user);
+            $viewRoute = route('manage.borrowed', $user);
+
+            $buttons = <<<HTML
+            <div class="button-container">
+                <form action="{$deleteRoute}" method="post" class="mb-3">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-200 hover:bg-red-400 text-black font-bold py-2 px-4 rounded-lg mb-4">
+                        Delete User
+                    </button>
+                </form>
+                <a href="{$viewRoute}" class="bg-green-200 hover:bg-green-400 text-black font-bold py-2 px-4 rounded-lg mb-4">View Borrowings</a>
+            </div>
+            HTML;
+            
+            $buttons = str_replace(
+                ['{$deleteRoute}', '{$viewRoute}', '@csrf', '@method(\'DELETE\')'], 
+                [route('users.destroy', $user), route('manage.borrowed', $user), csrf_field(), method_field('DELETE')], 
+                $buttons
+            );
+            
             $borrowedItemsCounter = $user->borrowings->count();
+            
             return [
                 $user->id,
                 $user->name,
                 $user->email,
                 $user->role,
                 $borrowedItemsCounter,
-                $deleteButton,
+                $buttons,
+                // $deleteButton.$viewBorrowingsButton,
             ];
         });
 
@@ -91,7 +110,6 @@ class UserController extends Controller
         } else {
             return redirect()->route('users.index')->with('error', 'Error deleting user!');
         }
-        
     }
 
     public function borrowedItems()
@@ -105,6 +123,14 @@ class UserController extends Controller
     public function return(Borrowing $borrowing)
     {
         $borrowing->delete();
-        return redirect()->route('user.borrowed')->with('success', 'Item marked as returned successfully!');
+        return redirect()->back()->with('success', 'Item marked as returned successfully!');
+    }
+
+    # For admins to view the borrowings of a user
+    public function manageBorrowings(User $user)
+    {
+        $borrowings = $user->borrowings;
+
+        return view('manage.borrowings', compact('borrowings'));
     }
 }

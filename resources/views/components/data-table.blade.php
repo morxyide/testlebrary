@@ -1,6 +1,6 @@
 <!-- resources/views/components/data-table.blade.php -->
 <div class="rounded overflow-hidden shadow my-2 mx-20">
-    <table class="w-full text-xs">
+    <table class="w-full">
         <thead>
         <tr class="text-left font-bold bg-blue-200">
             @foreach($headers as $header)
