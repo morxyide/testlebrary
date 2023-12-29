@@ -88,11 +88,13 @@ class BookController extends Controller
         return redirect()->route('books.index')->with('success', 'Book deleted successfully!');
     }
 
-    public function borrow(Book $book)
+    public function borrow(Request $request, Book $book)
     {
         $user = Auth::user();
         $borrowed_at = now();
-        $return_by = now()->addDays(14);
+        $days = $request->input('days');
+        $return_by = now()->addDays($days);
+        
 
         $book->borrowings()->create([
             'user_id' => $user->id,

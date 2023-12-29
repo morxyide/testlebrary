@@ -67,8 +67,12 @@ class CustomAuthController extends Controller
 
     public function dashboardPage()
     {
+        $borrowingsCount =  \App\Models\Borrowing::count();
+        $overdueCount = \App\Models\Borrowing::where('user_id', Auth::id())->where('return_by', '<', now())->count();
+        $totalOverdueCount = \App\Models\Borrowing::where('return_by', '<', now())->count();
+        
         if (Auth::check()) {
-            return view('dashboard');
+            return view('dashboard', compact('overdueCount', 'borrowingsCount', 'totalOverdueCount'));
         }
 
         return redirect()->route("login.page")->withSuccess('You are not allowed to access');
@@ -76,6 +80,7 @@ class CustomAuthController extends Controller
 
     public function signOut()
     {
+
         Session::flush();
         Auth::logout();
 

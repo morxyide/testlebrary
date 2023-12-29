@@ -70,6 +70,10 @@
                                 {{-- Borrow book button --}}
                                 <form action="{{ route('books.borrow', $book) }}" method="post" class="mb-2">
                                     @csrf
+                                    <div class="mb-3">
+                                        <label for="days" class="block"> Number of days</label>
+                                        <input type="number" name="days" id="days" class="" required>
+                                    </div>
                                     <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Borrow</button>
                                 </form>
                             @else
