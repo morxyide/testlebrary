@@ -22,7 +22,7 @@
 @else
 
     <div class="rounded overflow-hidden shadow my-2 mx-20">
-        <table class="w-full text-xs">
+        <table class="w-full text-sm">
             <thead>
             <tr class="text-left font-bold bg-blue-200">
                 {{-- <th class="px-2 py-3">ID</th> --}}
@@ -35,10 +35,10 @@
                 <th class="px-2 py-3">Category</th>
                 <th class="px-2 py-3 break-words">Description</th>
                 <th class="px-2 py-3">Quantity</th>
-                <th class="px-2 py-3">Action</th>
+                <th class="px-2 py-3">Want to borrow?</th>
             </tr>
             </thead>
-            <tbody class= "divide-y divide-gray-100">
+            <tbody class= "divide-y divide-gray-300">
             @foreach ($books as $book)
                 <tr>
                     {{-- <td class="px-2 py-3">{{ $book->id }}</td> --}}
@@ -66,18 +66,19 @@
                                 <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Delete</button>
                             </form>
                         @elseif (Auth::check() && Auth::user()->role == 'user')
-                            @if (!Auth::user()->borrowings->contains('borrowable_id', $book->id))
+                            @if (!Auth::user()->borrowings->where('borrowable_type', 'App\Models\Book')->contains('borrowable_id', $book->id))
                                 {{-- Borrow book button --}}
                                 <form action="{{ route('books.borrow', $book) }}" method="post" class="mb-2">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="days" class="block"> Number of days</label>
-                                        <input type="number" name="days" id="days" class="" required>
+                                        <label for="days" class="block text-center text-sm italic font-medium text-gray-700"> Number of days:</label>
+                                        
+                                        <input type="number" name="days" id="days" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm rounded-md border-gray-950 border" required>
                                     </div>
                                     <button type="submit" class="w-full bg-blue-200 hover:bg-blue-400 text-black font-bold py-2 px-4 rounded-lg">Borrow</button>
                                 </form>
                             @else
-                                    <p type="submit" class="w-full bg-green-200 text-black font-bold py-2 px-4 rounded-lg">Borrowed</p>
+                                    <p type="submit" class="w-full bg-gray-200 text-black font-bold py-2 px-4 rounded-lg text-center">Already Borrowed</p>
                             @endif
 
                         @endif

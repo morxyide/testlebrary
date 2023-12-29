@@ -35,7 +35,15 @@ Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.
 Route::post('/books/{book}/borrow', [BookController::class, 'borrow'])->name('books.borrow');
 
 // Magazines Routes
-Route::get('/magazine', [MagazineController::class, 'index'])->name('magazines.index');
+Route::get('/magazines', [MagazineController::class, 'index'])->name('magazines.index');
+Route::get('/magazine/create', [MagazineController::class, 'create'])->name('magazines.create');
+Route::post('/magazine', [MagazineController::class, 'store'])->name('magazines.store');
+Route::get('/magazine/{magazine}/edit', [MagazineController::class, 'edit'])->name('magazines.edit');
+Route::put('/magazine/{magazine}', [MagazineController::class, 'update'])->name('magazines.update');
+Route::delete('/magazine/{magazine}', [MagazineController::class, 'destroy'])->name('magazines.destroy');
+Route::post('/magazine/{magazine}/borrow', [MagazineController::class, 'borrow'])->name('magazines.borrow');
+
+
 
 
 // Dashboard Route

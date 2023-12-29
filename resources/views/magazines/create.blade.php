@@ -1,15 +1,10 @@
-<h1>Add New Book</h1>
-<a href="{{route('books.index')}}">Go to main</a>
-<form action="{{ route('books.store') }}" method="post">
+<h1>Add New Magazine</h1>
+<a href="{{route('magazines.index')}}">Go to main</a>
+<form action="{{ route('magazines.store') }}" method="post">
     @csrf
     <div class="form-group">
         <label for="title">Title</label>
         <input type="text" name="title" id="title" class="form-control" required>
-    </div>
-
-    <div class="form-group">
-        <label for="author">Author</label>
-        <input type="text" name="author" id="author" class="form-control" required>
     </div>
 
     <div class=form-group">
@@ -18,8 +13,8 @@
     </div>
 
     <div class=form-group">
-        <label for="isbn">ISBN</label>
-        <input type="text" name="isbn" id="isbn" class="form-control" required>
+        <label for="issn">ISSN</label>
+        <input type="text" name="issn" id="issn" class="form-control" required>
     </div>
 
     <div class=form-group">
