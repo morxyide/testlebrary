@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CDController;
 use App\Http\Controllers\MagazineController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,14 @@ Route::put('/magazine/{magazine}', [MagazineController::class, 'update'])->name(
 Route::delete('/magazine/{magazine}', [MagazineController::class, 'destroy'])->name('magazines.destroy');
 Route::post('/magazine/{magazine}/borrow', [MagazineController::class, 'borrow'])->name('magazines.borrow');
 
+// CD Routes
+Route::get('/cds', [CDController::class, 'index'])->name('cds.index');
+Route::get('/cd/create', [CDController::class, 'create'])->name('cds.create');
+Route::post('/cd', [CDController::class, 'store'])->name('cds.store');
+Route::get('/cd/{cd}/edit', [CDController::class, 'edit'])->name('cds.edit');
+Route::put('/cd/{cd}', [CDController::class, 'update'])->name('cds.update');
+Route::delete('/cd/{cd}', [CDController::class, 'destroy'])->name('cds.destroy');
+Route::post('/cd/{cd}/borrow', [CDController::class, 'borrow'])->name('cds.borrow');
 
 
 
