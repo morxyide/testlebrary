@@ -6,6 +6,7 @@ use App\Http\Controllers\MagazineController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\VideoController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,14 @@ Route::put('/cd/{cd}', [CDController::class, 'update'])->name('cds.update');
 Route::delete('/cd/{cd}', [CDController::class, 'destroy'])->name('cds.destroy');
 Route::post('/cd/{cd}/borrow', [CDController::class, 'borrow'])->name('cds.borrow');
 
+// Video Routes
+Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/video/create', [VideoController::class, 'create'])->name('videos.create');
+Route::put('/video/{video}', [VideoController::class, 'update'])->name('videos.update');
+Route::post('/video', [VideoController::class, 'store'])->name('videos.store');
+Route::get('/video/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+Route::delete('/video/{video}', [VideoController::class, 'destroy'])->name('videos.destroy');
+Route::post('/video/{video}/borrow', [VideoController::class, 'borrow'])->name('videos.borrow');
 
 
 // Dashboard Route

@@ -91,7 +91,7 @@ class MagazineController extends Controller
         $user = Auth::user();
         $borrowed_at = now();
         $days = $request->input('days');
-        $return_by = now()->addDays($days);
+        $return_by = $borrowed_at->addDays($days);
 
         $magazine->borrowings()->create([
             'user_id' => $user->id,
