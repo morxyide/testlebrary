@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // user_id
             $table->morphs('borrowable'); // borrowable_id, borrowable_type
             $table->timestamp('borrowed_at');
-            $table->timestamp('return_by');
+            $table->timestamp('return_by')->nullable();
             $table->timestamps();
         });
     }
